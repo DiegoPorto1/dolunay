@@ -1,0 +1,44 @@
+.OfertalistContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+    flex-wrap:wrap ;
+     margin: 50px;
+     margin-bottom: 20px;
+    border: 5px rgb(95, 97, 130);
+}
+.titleOferta-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-top: 50px;
+    
+
+  }
+  
+  .line {
+    flex: 1;
+    height: 2px;
+    background-color: #000;
+  
+    
+  }
+  
+  .title {
+    margin: 0 20px;
+  }
+@media (max-width: 767px) {
+    .OfertalistContainer {
+        margin: 10px;
+        margin-bottom: 50px;
+        justify-content: center;    
+
+    }
+    .line {
+        flex: 1;
+        height: 2px;
+        background-color: #000;
+        width: 90px;
+        
+      }
+}

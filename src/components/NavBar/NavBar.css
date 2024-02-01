@@ -1,0 +1,108 @@
+.containerNav {
+  border-bottom: 2px solid;
+  background-color: white;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 70px;
+  margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+  padding-top: 10px;
+}
+
+.hambur {
+  margin-left: 0px;
+  width: 30px;
+  height: 30px;
+}
+img {
+  width: 30px;
+  height: 30px;
+}
+.containerbotones {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.menu li {
+  position: relative;
+  margin-right: 20px;
+}
+
+.menu li .btn1 {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s;
+}
+.menu li.active .botones {
+  display: block;
+}
+
+.menu .botones {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgb(207, 214, 178, 0.9);
+  list-style: none;
+  padding: 0;
+  z-index: 9999;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu li ul.active .btn1 {
+  color: #00f;
+}
+
+.menu ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+ 
+  background-color: rgb(207, 214, 178, 0.9);
+  list-style: none;
+  padding: 0;
+  z-index: 9999;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu li.active ul {
+  display: block;
+}
+
+.menu ul li {
+  width: 200px;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .containerNav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .menu li {
+    margin-right: 10px; /* Ajusta el margen entre elementos de la lista en dispositivos móviles */
+  }
+}

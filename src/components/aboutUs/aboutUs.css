@@ -1,0 +1,101 @@
+/* Estilos para el componente BusinessPresentation */
+.business-presentation {
+    display: flex;
+    flex-direction: row; /* En modo desktop, la imagen está al lado del texto */
+    align-items: center; /* Centra verticalmente el contenido */
+    padding: 20px;
+    background-color: white; /* Fondo gris claro para decoración */
+  
+    /* Estilos para modo mobile (ancho <= 768px) */
+    @media (max-width: 768px) {
+        .presentation-image > .img {
+            width: 340px;
+            height: 340px;
+            margin: 0;
+        }
+        
+      flex-direction: column; /* En modo mobile, la imagen está encima del texto */
+      text-align: center; /* Centra horizontalmente el contenido */
+
+    }
+  }
+  
+  /* Estilos para la imagen */
+  .presentation-image > .img {
+    width: 400px;
+    
+    height: 400px  ;
+    margin-right: 20px; /* Espacio entre la imagen y el texto en modo desktop */
+    margin-bottom: 20px; /* Espacio entre la imagen y el texto en modo mobile */
+    border: 2px solid #333; /* Borde alrededor de la imagen */
+    border-radius: 8px; /* Bordes redondeados para la imagen */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  }
+  
+  /* Estilos para el texto */
+  .presentation-text {
+    background-color: rgb(203,175,209); /* Fondo blanco para el área de texto */
+    padding: 20px;
+    border: 2px solid #333; /* Borde alrededor del área de texto */
+    border-radius: 8px; /* Bordes redondeados para el área de texto */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  }
+  
+ 
+  
+  /* Estilos para el párrafo de texto */
+  .presentation-text p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+
+ 
+
+
+/*Aca la opcion 1*/
+
+.presentation {
+  background-image: url('aboutUs.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  padding: 100px 0;
+}
+
+.presentation-content {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+p {
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .presentation {
+    padding: 50px 0;
+    text-align: center;
+    background-size: cover;
+  }
+
+  .presentation-content {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    border-radius: 0;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,44 @@
+.containeritemdetail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px;
+}
+.bloque {
+    display: flex;
+    
+}
+
+.bloque2 {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.bloque2 p {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.agregado {
+    display: flex;
+    padding: 16px;
+    gap: 50px;
+    justify-content: space-around;
+}
+
+.detailimg img {
+    width: 200px;
+    height: 200px;
+}
+button {
+padding: 8px 16px;
+border: 1px solid #333;
+background-color: transparent;
+color: #333;
+font-size: 14px;
+font-weight: bold;
+border-radius: 3px;
+text-transform: uppercase;
+cursor: pointer;
+}

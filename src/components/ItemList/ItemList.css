@@ -1,0 +1,43 @@
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: solid 20px;
+    border-image: url('./guardainferior.jpg') 300 round stretch;
+    gap: 10px;
+    background-color: rgb(203,175,209);
+  
+  }
+
+  /*.list::before,
+.list::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  height: 20px;
+}
+
+.::before {
+  background-image: url('borde-superior.jpg');
+  background-repeat: repeat-x;
+}
+
+.border-image-multiple::after {
+  bottom: -20px;
+  background-image: url('borde-inferior.jpg');
+  background-repeat: repeat-x;
+}*/
+  
+  @media (max-width: 500px) {
+    .list {
+      
+      align-items: center;
+      justify-content: space-around;
+      gap: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+    }
+  }
+  

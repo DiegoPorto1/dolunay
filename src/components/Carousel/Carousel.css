@@ -1,0 +1,84 @@
+/* Carousel.css */
+
+/* Estilos generales del carrusel */
+.carousel-root {
+    max-width: 100%;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 50px;
+  }
+  
+  /* Estilos para las diapositivas */
+  .carousel .slide {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 300px;
+  }
+  
+  /* Estilos para las imágenes en el carrusel */
+  .carousel .slide img {
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Altura máxima para las imágenes en dispositivos móviles */
+    object-fit: cover; /* Ajustar la imagen para mantener la relación de aspecto */
+  }
+  
+  /* Estilos para los botones de navegación (flechas) */
+  .carousel .thumbs-wrapper {
+    display: none; /* Ocultar las miniaturas */
+  }
+  
+  .carousel .carousel-status {
+    display: none; /* Ocultar el contador de diapositivas */
+  }
+  
+  .carousel .carousel-arrow {
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 8px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .carousel .carousel-arrow:hover {
+    background-color: #555;
+  }
+  
+  .carousel .carousel-arrow.carousel-arrow-left {
+    left: 20px;
+  }
+  
+  .carousel .carousel-arrow.carousel-arrow-right {
+    right: 20px;
+  }
+  
+  /* Estilos para la versión móvil */
+  @media (max-width: 767px) {
+    .carousel-root {
+        max-width: 100%;
+        margin: 10px;
+       
+      }
+  
+    .carousel > .slide {
+      height: 100%; /* Altura fija para las diapositivas en dispositivos móviles */
+    }
+  
+    .carousel .slide img {
+      height: 100%; /* Asegurar que las imágenes ocupen la altura completa de la diapositiva */
+    }
+    .slider-wrapper {
+      height: 100px;
+    }
+    .carousel .thumbs-wrapper {
+      display: none; /* Ocultar las miniaturas en dispositivos móviles */
+      height: 100%;    
+    }
+  }

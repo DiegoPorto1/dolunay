@@ -1,0 +1,118 @@
+body {
+  height: 100vh;
+  background-color: white; /* Establecer el color de fondo inicial en blanco */
+
+}
+
+.loadingscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+background-color: white;
+  background-image: url('cielo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: background-color 0.5s ease;
+  animation: cambioFondo 6s linear;
+  
+}
+
+.loader {
+  animation: slide-in-elliptic-left-bck 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.loader img {
+  width: 100px;
+  height: 100px;
+}
+
+@keyframes cambioFondo {
+  0% {
+      background-color: white;
+      opacity: 0;
+  }
+  50% {
+      background-color: transparent;
+      opacity: 0.5;
+  }
+  75% {
+    background-color: transparent; /* Color de fondo final transparente */
+    opacity: 1; /* Opacidad al 100% para revelar completamente la imagen */
+}
+
+  100% {
+      background-color: transparent; /* Color de fondo final transparente */
+      opacity: 1; /* Opacidad al 100% para revelar completamente la imagen */
+  }
+}
+
+
+@keyframes slide-in-elliptic-left-bck {
+  0% {
+    transform: translateX(-800px) rotateY(-30deg) scale(6.5);
+    transform-origin: 200% 50%;
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(-100px) rotateY(0) scale(1);
+    transform-origin: -600px 150%;
+    opacity: 1;
+  }
+ 
+}
+
+
+
+ @-webkit-keyframes slide-in-blurred-br {
+  0% {
+    -webkit-transform: translate(1000px, 1000px) skew(80deg, 10deg);
+            transform: translate(1000px, 1000px) skew(80deg, 10deg);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate(0, 0) skew(0deg, 0deg);
+            transform: translate(0, 0) skew(0deg, 0deg);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-blurred-br {
+  0% {
+    -webkit-transform: translate(1000px, 1000px) skew(80deg, 10deg);
+            transform: translate(1000px, 1000px) skew(80deg, 10deg);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate(0, 0) skew(0deg, 0deg);
+            transform: translate(0, 0) skew(0deg, 0deg);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+
+
+
+@keyframes backColor {
+  0% {
+    background-color: black;
+  }
+  100% {
+    background-color: white;
+  }
+ 
+}
