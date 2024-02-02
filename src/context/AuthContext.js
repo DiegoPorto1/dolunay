@@ -6,6 +6,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isAuthenticated,setIsAuthenticated]= useState(false)
 
   const login = async (userData) => {
     try {
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data.user);
         localStorage.setItem('token', token);
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        setIsAuthenticated(true)
       } else {
         console.error('Error de autenticación');
       }
@@ -38,10 +40,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const isAuthenticated = () => {
+  /*const isAuthenticated = () => {
     // Verificar si el usuario está autenticado (por ejemplo, si hay información del usuario en el estado).
     return !!user;
-  };
+  };*/
 
   return (
     <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>

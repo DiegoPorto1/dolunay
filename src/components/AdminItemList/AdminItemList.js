@@ -13,7 +13,7 @@ const AdminItemList = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/productos');
+            const response = await axios.get('http://localhost:4000/api/products');
             const productsWithArrayImages = response.data.map(product => {
                 return {
                     ...product,

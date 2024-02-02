@@ -4,11 +4,11 @@ import axios from "axios";
 
 
 
-const AdminItem = ({ _id, name, img, price, stock, onDelete, onModify }) => {
+const AdminItem = ({ _id, title, img, price, stock, onDelete, onModify }) => {
     const handleDelete = async () => {
       try {
         // Lógica para eliminar el producto
-        await axios.delete(`http://localhost:4000/productos/${_id}`);
+        await axios.delete(`http://localhost:4000/api/products/${_id}`);
         onDelete(_id);
       } catch (error) {
         console.error('Error al eliminar el producto:', error);
@@ -18,7 +18,7 @@ const AdminItem = ({ _id, name, img, price, stock, onDelete, onModify }) => {
     return (
       <article className="product-card">
         <header className="Header">
-          <h2 className="product-name">{name}</h2>
+          <h2 className="product-name">{title}</h2>
         </header>
         <div className="product-images">
           {/* Muestra solo la primera imagen */}

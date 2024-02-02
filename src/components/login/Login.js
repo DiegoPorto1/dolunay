@@ -1,28 +1,42 @@
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; // Asegúrate de importar el contexto correctamente.
+import { useAuth } from '../../context/AuthContext';
 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth();  // Obtén la función login del contexto.
+  const { login, isAuthenticated } = useAuth();  
+
+
+  useEffect(() => {
+   
+
+    if (isAuthenticated) {
+      navigate('/admin')
+      console.log('Usuario autenticado. Realizar acciones...');
+    } else {
+     
+      console.log('Usuario no autenticado. Realizar otras acciones...');
+    }
+
+    
+   
+  }, [isAuthenticated]); 
 
   const handleLogin = async () => {
     try {
         console.log('Datos enviados al backend:', { email, password }); // Agrega este log
 
-      
-      // Llama a la función login del contexto para manejar la autenticación.
       login({email : email, password: password});
-      
-      // Puedes manejar el estado de la aplicación o redirigir a otra página después del inicio de sesión exitoso.
-      navigate('/admin');
+    
+      navigate('/admin')
     } catch (error) {
-      console.error('Error during login:', error.message);
-      // Puedes mostrar un mensaje de error o manejar la lógica de error de otra manera.
+
+      
     }
   };
 

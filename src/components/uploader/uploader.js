@@ -4,7 +4,7 @@ import './uploader.css';
 
 const Uploader = () => {
   const [product, setProduct] = useState({
-    name: '',
+    title: '',
     description: '',
     price: 0,
     stock: 0,
@@ -20,7 +20,7 @@ const Uploader = () => {
 
     setProduct((prevProduct) => {
       if (name === 'thumbnails') {
-        // Para el campo de archivos, utiliza e.target.files
+        //  el campo de archivos, utiliza e.target.files
         return {
           ...prevProduct,
           [name]: files ? Array.from(files) : [], // Convertir a array si hay archivos, de lo contrario, asignar un array vacío
@@ -54,7 +54,7 @@ const Uploader = () => {
       });
 
       // Envia la información del producto al backend
-      await axios.post('http://localhost:4000/productos/upload', formData, {
+      await axios.post('http://localhost:4000/api/products/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -62,7 +62,7 @@ const Uploader = () => {
 
       // Restablece el formulario después de enviar
       setProduct({
-        name: '',
+        title: '',
         description: '',
         price: 0,
         stock: 0,
@@ -86,8 +86,8 @@ const Uploader = () => {
           Nombre:
           <input
             type="text"
-            name="name"
-            value={product.name}
+            name="title"
+            value={product.title}
             onChange={handleChange}
             required
           />
