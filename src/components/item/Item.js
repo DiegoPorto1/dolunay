@@ -14,7 +14,7 @@ const Item = ({ _id, title, thumbnails, price, stock }) => {
         {/* Muestra solo la primera imagen */}
         {thumbnails.length > 0 && (
           <img
-            src={`http://localhost:4000/${thumbnails[0].replace(/\\/g, '/')}`}
+            src={`https://donulayback.onrender.com/${thumbnails[0].replace(/\\/g, '/')}`}
             alt={`Thumbnail 0`}
             className="product-image"
           />

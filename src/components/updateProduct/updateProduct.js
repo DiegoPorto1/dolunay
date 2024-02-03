@@ -1,44 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams, Link} from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { useRef } from "react";
 
 const UpdateProduct = ({ history }) => {
+  const formRef = useRef(null);
+  const { isAuthenticated } = useAuth();
   const { productId } = useParams();
 
   const [product, setProduct] = useState({
-    name: '',
+    title: '',
     description: '',
     price: 0,
     stock: 0,
     category: '',
     status: true,
     code: '',
-    thumbnails: [], // Modificado para reflejar el nombre del modelo
+    thumbnails: [],
   });
+
   const [successMessage, setSuccessMessage] = useState(null);
-  
+
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
         console.log('Fetching product details for productId:', productId);
-        const response = await axios.get(`http://localhost:4000/productos/${productId}`);
-        console.log('Response:', response.data);
+        const response = await fetch(`https://donulayback.onrender.com/api/products/${productId}`);
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          console.error('Error fetching product details:', errorMessage);
+          return;
+        }
 
-        // Asegurémonos de que los valores iniciales sean siempre definidos
+        const productData = await response.json();
+        console.log('Response:', productData);
+
         const initialProduct = {
-          name: response.data.name || '',
-          description: response.data.description || '',
-          price: response.data.price || 0,
-          stock: response.data.stock || 0,
-          category: response.data.category || '',
-          status: response.data.status || true,
-          code: response.data.code || '',
-          thumbnails: response.data.thumbnails || [],
+          title: productData.title || '',
+          description: productData.description || '',
+          price: productData.price || 0,
+          stock: productData.stock || 0,
+          category: productData.category || '',
+          status: productData.status || true,
+          code: productData.code || '',
+          thumbnails: productData.thumbnails || [],
         };
 
         setProduct(initialProduct);
       } catch (error) {
-        console.error('Error al obtener detalles del producto:', error);
+        console.error('Error fetching product details:', error);
       }
     };
 
@@ -47,15 +57,13 @@ const UpdateProduct = ({ history }) => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    
+
     if (name === 'thumbnails') {
-      // Para el campo de archivos, utiliza e.target.files
       setProduct((prevProduct) => ({
         ...prevProduct,
-        [name]: files ? Array.from(files) : [], // Convertir a array si hay archivos, de lo contrario, asignar un array vacío
+        [name]: files ? Array.from(files) : [],
       }));
     } else {
-      // Para otros campos, usa el valor normal
       setProduct((prevProduct) => ({
         ...prevProduct,
         [name]: value,
@@ -65,51 +73,53 @@ const UpdateProduct = ({ history }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const formData = new FormData();
-      Object.entries(product).forEach(([key, value]) => {
-        if (key === 'thumbnails') {
-          // Manejar el caso de las imágenes
-          value.forEach((image) => {
-            formData.append('thumbnails', image);
-          });
+      const formData = new FormData(formRef.current); // Usar formRef.current directamente
+      const data = Object.fromEntries(formData.entries());
+  
+      if (isAuthenticated) {
+        const token = localStorage.getItem('token');
+        console.log('Token almacenado:', token);
+        const response = await fetch(`https://donulayback.onrender.com/api/products/${productId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': ` ${token}`,
+          },
+          body: JSON.stringify(data),
+        });
+  
+        if (response.ok) {
+          setSuccessMessage('¡Producto actualizado con éxito!');
+          console.log('Producto actualizado con éxito');
+  
+          setTimeout(() => {
+            if (history && history.push) {
+              history.push('http://localhost:3000/admin');
+            }
+          }, 1000);
         } else {
-          formData.append(key, value);
+          console.error('Error updating product:', response.statusText);
         }
-      });
-
-      // Lógica para enviar los cambios al servidor
-      await axios.put(`http://localhost:4000/productos/${productId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      setSuccessMessage('¡Producto actualizado con éxito!');
-
-      console.log('Producto actualizado con éxito');
-      // Redirecciona al usuario a la página de detalles del producto actualizado
-     setTimeout(() => {
-        if (history && history.push) {
-          history.push('http://localhost:3000/admin');
-        }
-      }, 1000);
+      }
     } catch (error) {
-      console.error('Error al actualizar el producto:', error);
+      console.error('Error updating product:', error);
     }
   };
+
   const handleGoToAdmin = () => {
-    // Redirige al usuario a la página de administrador
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
   return (
     <div>
       <h2>Actualizar Producto</h2>
      
-      <form onSubmit={handleSubmit} encType="multipart/form-data" >
+      <form ref={formRef} onSubmit={handleSubmit} encType="multipart/form-data" >
         <label>
           Nombre:
-          <input type="text" name="name" value={product.name} onChange={handleChange} />
+          <input type="text" name="title" value={product.title} onChange={handleChange} />
         </label>
         <br />
         <label>
@@ -175,7 +185,7 @@ const UpdateProduct = ({ history }) => {
           <input type="file" name="thumbnails" multiple onChange={handleChange} />
         </label>
         <br />
-        <button type="submit">Actualizar Producto</button>
+        <button type="submit" onClick={handleSubmit}>Actualizar Producto</button>
         {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
         
       </form>

@@ -14,7 +14,7 @@ const ItemDetailContainer = () => {
 
       try {
         // Hacer una solicitud a la nueva ruta en tu servidor
-        const response = await fetch(`http://localhost:4000/productos/${itemId}`);
+        const response = await fetch(`https://donulayback.onrender.com/productos/${itemId}`);
 
         if (!response.ok) {
           throw new Error("Error al obtener el producto");

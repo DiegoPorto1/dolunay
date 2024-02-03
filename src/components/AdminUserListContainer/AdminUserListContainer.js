@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import AdminUsersList from '../adminUserList/adminUserList';
+import { useAuth } from '../../context/AuthContext';
 
 const AdminUserListContainer = () => {
+  const { isAuthenticated } = useAuth();
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
 
@@ -11,8 +12,21 @@ const AdminUserListContainer = () => {
       try {
         setLoading(true);
         // Obtener todos los usuarios
-        const response = await axios.get('http://localhost:4000/api/users');
-        setUsers(response.data);
+        if (isAuthenticated) {
+        const token = localStorage.getItem('token');
+        const response = await fetch('https://donulayback.onrender.com/api/users', {
+          headers: {
+            'Authorization': ` ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUsers(data);
+          console.log("este es el response de userAdmn", data);
+        } else {
+          console.error('Error al obtener usuarios:', response.statusText);
+        }}
       } catch (error) {
         console.error('Error al obtener usuarios:', error);
       } finally {

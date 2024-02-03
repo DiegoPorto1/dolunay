@@ -38,13 +38,13 @@ const ItemDetail = ({ _id, name, thumbnails, category, description, price, stock
               thumbnails.map((thumbnail, index) => (
                 <div key={index}>
                   {/* Ajusta la construcción de la URL de la imagen */}
-                  <img src={`http://localhost:4000/${thumbnail.replace(/\\/g, '/')}`} alt={name} />
+                  <img src={`https://donulayback.onrender.com/${thumbnail.replace(/\\/g, '/')}`} alt={name} />
                 </div>
               ))
             ) : (
               <div>
                 {/* Ajusta la construcción de la URL de la imagen */}
-                <img src={`http://localhost:4000/${thumbnails.replace(/\\/g, '/')}`} alt={name} />
+                <img src={`https://donulayback.onrender.com/${thumbnails.replace(/\\/g, '/')}`} alt={name} />
               </div>
             )}
           </Carousel>

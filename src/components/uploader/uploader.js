@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+
 import './uploader.css';
+import { useAuth } from '../../context/AuthContext';
+
+
 
 const Uploader = () => {
+  const { isAuthenticated } = useAuth();
   const [product, setProduct] = useState({
     title: '',
     description: '',
@@ -44,7 +48,6 @@ const Uploader = () => {
       const formData = new FormData();
       Object.entries(product).forEach(([key, value]) => {
         if (key === 'thumbnails') {
-          // Manejar el caso de las imágenes
           value.forEach((image) => {
             formData.append('thumbnails', image);
           });
@@ -52,27 +55,38 @@ const Uploader = () => {
           formData.append(key, value);
         }
       });
-
-      // Envia la información del producto al backend
-      await axios.post('http://localhost:4000/api/products/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      // Restablece el formulario después de enviar
-      setProduct({
-        title: '',
-        description: '',
-        price: 0,
-        stock: 0,
-        category: '',
-        status: true,
-        code: '',
-        thumbnails: [],
-      });
-
-      console.log('Producto enviado correctamente al backend');
+  
+      if (isAuthenticated) {
+        const token = localStorage.getItem('token');
+        console.log('Token almacenado:', token);
+  
+        const response = await fetch('https://donulayback.onrender.com/api/products/upload', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Authorization': ` ${token}`,
+          },
+          body: formData,
+        });
+  
+        if (response.ok) {
+          // Restablece el formulario después de enviar
+          setProduct({
+            title: '',
+            description: '',
+            price: 0,
+            stock: 0,
+            category: '',
+            status: true,
+            code: '',
+            thumbnails: [],
+          });
+  
+          console.log('Producto enviado correctamente al backend');
+        } else {
+          console.error('Error al enviar el producto al backend:', response.statusText);
+        }
+      }
     } catch (error) {
       console.error('Error al enviar el producto al backend', error);
     }

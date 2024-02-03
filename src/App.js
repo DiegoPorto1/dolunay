@@ -24,6 +24,8 @@ import AdminUserListContainer from './components/AdminUserListContainer/AdminUse
 
 
 
+
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -51,7 +53,7 @@ function App() {
                 <Route path="/category/:categoryId" element={<ItemListContainer  />} />
                 <Route path="/item/:itemId" element={<ItemDetailContainer />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin" element={<AdminPage />} />
                 <Route path="/admin/products" element={<AdminItemListContainer />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin/products/update/:productId" element={<UpdateProduct />} />
@@ -83,15 +85,6 @@ function Home() {
   );
 }
 
-function Admin() {
-  return (
-    <div>
-      
-      <AdminPage/>
-   
-      
-    </div>
-  );
-}
+
 
 export default App;

@@ -6,11 +6,12 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isAuthenticated,setIsAuthenticated]= useState(false)
-
+  const [isAuthenticated,setIsAuthenticated]= useState(
+    localStorage.getItem('token') !== null
+  );
   const login = async (userData) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/session/login', userData);
+      const response = await axios.post('https://donulayback.onrender.com/api/session/login', userData);
   console.log("este es el user", userData)
   console.log("este es el response", response)
       if (response.status === 200) {
@@ -29,12 +30,13 @@ export const AuthProvider = ({ children }) => {
   
   const logout = async () => {
     try {
-      await axios.post('http://localhost:4000/api/session/logout');
+      await axios.post('https://donulayback.onrender.com/api/session/logout');
   
      
       localStorage.removeItem('token');
       delete axios.defaults.headers.common['Authorization'];
       setUser(null);
+      setIsAuthenticated(false);
     } catch (error) {
       console.error('Error al comunicarse con el servidor', error);
     }

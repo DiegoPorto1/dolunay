@@ -7,7 +7,7 @@ const ItemList = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/api/products')
+        axios.get('https://donulayback.onrender.com/api/products')
             .then(response => {
                 const productList = Array.isArray(response.data) ? response.data : [];
                 const productsWithArrayImages = productList.map(product => {
